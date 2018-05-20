@@ -1,0 +1,31 @@
+import tensorflow as tf
+
+#input1 = tf.constant([3.0])
+#input2 = tf.constant([4.5])
+#add = tf.add(input1, input2)
+#input3 = tf.constant([3.0])
+#output = tf.multiply(add, input3)
+
+#input1 = tf.placeholder(tf.float32)
+#input2 = tf.placeholder(tf.float32)
+#add = tf.add(input1, input2)
+#input3 = tf.placeholder(tf.float32)
+#output = tf.multiply(add, input3)
+
+input1 = tf.placeholder(tf.float32)
+input2 = tf.placeholder(tf.float32)
+add = tf.add(input1, input2)
+input3 = tf.Variable(3.0)
+output = tf.multiply(add, input3)
+plus_one = tf.add(input3, 1.0)
+update = tf.assign(input3, plus_one)
+
+
+sess = tf.Session()
+init = tf.global_variables_initializer()
+sess.run(init)
+for i in range(5):
+    result = sess.run(output, feed_dict={input1:3.0, input2:4.5})
+    sess.run(update)
+    print(result)
+sess.close()
